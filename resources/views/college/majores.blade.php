@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست دانشکده های دانشگاه</title>
+</head>
+<body>
+    @include('header')
+
+    <h1 class="text-center text-3xl font-bold text-gray-700 my-10">لیست رشته های دانشکده {{ $college->name }}</h1>
+
+    <div class="w-9/12 m-auto">
+        <a href="{{ route('college.colleges') }}" class="inline-block px-5 py-2 transition-all duration-200 border rounded-md bg-amber-300 hover:bg-amber-500 text-gray-700 font-semibold hover:text-white">
+            بازگشت
+        </a>
+    </div>
+    <div class="mt-10 w-2/3 m-auto">
+        <div class="w-full p-5 grid grid-cols-4 gap-5 text-center border-b mb-3 text-lg text-gray-700 font-semibold">
+            <span>
+                آیدی
+            </span>
+            <span>
+                نام دانشکده
+            </span>
+           
+            <div class="col-span-2 border-r">
+               رشته ها
+            </div>
+        </div>
+    </div>
+    <div class="mt-10 w-2/3 m-auto">
+        <div class="w-full p-5 grid grid-cols-4 gap-5 text-center border-b mb-3 text-lg font-normal text-gray-700">
+            <span>
+                {{ $college->id }}
+            </span>
+            <span>
+                {{ $college->name }}
+            </span>
+            <div class="col-span-2 border-r text-start pr-3">
+                @if($college->majors)
+                <?php $i=1; ?>
+                @foreach($college->majors as $major)
+                <span class="block">
+                    <?= $i." : ";  ?>{{ $major->name }}
+                </span>
+                <?php $i++; ?>
+                @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+</body>
+</html>
